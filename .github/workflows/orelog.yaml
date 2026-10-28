@@ -12,9 +12,9 @@ jobs:
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: '17'
+          java-version: '21'
       - name: Build shadowJar
-        run: ./gradlew :bootstrap-standalone:shadowJar --no-daemon
+        run: ./gradlew :bootstrap:standalone:shadowJar --no-daemon
       - uses: actions/upload-artifact@v4
         with:
           name: Geyser-Standalone
