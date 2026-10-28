@@ -36,6 +36,7 @@ import org.geysermc.geyser.translator.protocol.PacketTranslator;
 import org.geysermc.geyser.translator.protocol.Translator;
 import org.geysermc.geyser.translator.sound.BlockSoundInteractionTranslator;
 import org.geysermc.mcprotocollib.protocol.packet.ingame.clientbound.level.ClientboundBlockUpdatePacket;
+import org.geysermc.geyser.util.OreSnitch;
 
 @Translator(packet = ClientboundBlockUpdatePacket.class)
 public class JavaBlockUpdateTranslator extends PacketTranslator<ClientboundBlockUpdatePacket> {
