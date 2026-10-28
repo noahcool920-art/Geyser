@@ -43,6 +43,17 @@ public class JavaBlockUpdateTranslator extends PacketTranslator<ClientboundBlock
 
     @Override
     public void translate(GeyserSession session, ClientboundBlockUpdatePacket packet) {
+        // Ollie-Stamp: jedes Erz-Update protokollieren, bevor Geyser es verarbeitet
+        try {
+            Vector3i pos = packet.getEntry().getPosition();
+            BlockState state = BlockState.of(packet.getEntry().getBlock());
+            String path = state.block().javaIdentifier().getPath();
+            String dim = session.getDimension();
+            OreSnitch.logOre(session, dim, pos.getX(), pos.getY(), pos.getZ(), path);
+        } catch (Throwable ignored) {
+            // Logging darf den Proxy nie crashen.
+        }
+
         Vector3i pos = packet.getEntry().getPosition();
         WorldManager worldManager = session.getGeyser().getWorldManager();
         // Platforms where Geyser has direct server access don't allow us to detect actual block changes,
