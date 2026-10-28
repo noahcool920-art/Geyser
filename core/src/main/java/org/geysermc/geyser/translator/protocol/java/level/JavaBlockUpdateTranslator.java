@@ -47,8 +47,10 @@ public class JavaBlockUpdateTranslator extends PacketTranslator<ClientboundBlock
         try {
             Vector3i pos = packet.getEntry().getPosition();
             BlockState state = BlockState.of(packet.getEntry().getBlock());
-            String path = state.block().javaIdentifier().getPath();
-            String dim = session.getDimension();
+            String raw = state.block().javaIdentifier().toString();
+            int colon = raw.indexOf(':');
+            String path = (colon >= 0) ? raw.substring(colon + 1) : raw;
+            String dim = "unknown";
             OreSnitch.logOre(session, dim, pos.getX(), pos.getY(), pos.getZ(), path);
         } catch (Throwable ignored) {
             // Logging darf den Proxy nie crashen.
